@@ -26,7 +26,7 @@
     README. You can do this by saving an image in the repository and linking to it. See the sample CRC card below - 
     and REPLACE it with your own:
 
-![img_2.png](img_2.png)
+![img_2.png](image/img_2.png)
 
 ![img_4.png](img_4.png)
 
