@@ -1,4 +1,4 @@
-#Import
+import tkinter as tk
 
 class Gui:
     def __init__(self):
@@ -19,3 +19,10 @@ class Gui:
 
     def exit_game(self):
         pass
+
+    def show_marbles(self):
+        pass
+
+    def update_chat(self):
+        pass
+
