@@ -18,7 +18,7 @@
 
 ️**Source Assignment(s)**: `Hw06: The Game of Nim`
 
-❗️**CRC Card(s)**:
+️**CRC Card(s)**:
   - Create a CRC card for each class that your project will implement.
   - See this link for a sample CRC card and a template to use for your own cards (you will have to make a copy to edit):
     [CRC Card Example](https://docs.google.com/document/d/1JE_3Qmytk_JGztRqkPXWACJwciPH61VCx3idIlBCVFY/edit?usp=sharing)
@@ -28,9 +28,9 @@
 
 ![img_2.png](image/img_2.png)
 
-![img_4.png](img_4.png)
+![img_4.png](image/img_4.png)
 
-![img_5.png](img_5.png)
+![img_5.png](image/img_5.png)
 
 ️**Branches**: This project will **require** effective use of git. 
 
@@ -61,7 +61,14 @@ section as you go. DO NOT forget about it!
 What has surprised you so far? Describe your general feelings. Be honest with yourself; this section is for you, not me.
 
 ```
-    **Replace this text with your reflection
+    i feel behind as been focused on other finals but now i feel like with the time 
+    i have i can dedicate a majority of my time and be able to complete my parts in time
+    - Preston
+    
+    
+    -Mateo
+    
+    
 ```
 
 ---
