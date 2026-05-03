@@ -26,3 +26,6 @@ class Gui:
     def update_chat(self):
         pass
 
+    def game_difficulty(self):
+        pass
+
