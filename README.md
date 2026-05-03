@@ -52,6 +52,7 @@ section as you go. DO NOT forget about it!
 
 https://youtu.be/epDKamC-V-8?si=1bNJ4eY1hHNsV5Ux
 https://youtu.be/eaxPK9VIkFM?si=GmSGtN2QnYjL17UJ
+https://share.google/aimode/grbidWlJItPTIR9Ar
 
 
 ---

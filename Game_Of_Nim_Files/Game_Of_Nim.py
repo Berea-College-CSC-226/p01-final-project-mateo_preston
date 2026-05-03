@@ -25,14 +25,15 @@ class Menu(ttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        test = ttk.Button(self, text = "test")
+        start_btn = ttk.Button(self, text = "Start Game")
 
-        entry = ttk.Entry(self)
+        slider = tk.Scale(self, from_ = 15, to = 30, orient = tk.HORIZONTAL)
 
-        self .columnconfigure((0,1,2), weight = 1, uniform = "a")
-        self.rowconfigure((0,1,2,3,4), weight = 1, uniform = "a")
+        self .columnconfigure(0, weight = 0, uniform = "a")
+        self.rowconfigure(0, weight = 0, uniform = "a")
 
-        test.grid(column = 0, row = 0, sticky = "nswe", columnspan = 2)
+        start_btn.grid(column = 0, row = 1, sticky = "nsew")
+        slider.grid(column = 0, row = 0, sticky = "nsew")
 
 
 def main():
