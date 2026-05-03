@@ -1,31 +1,28 @@
 import tkinter as tk
+from tkinter import ttk
 
-class Gui:
+class App(tk.Tk):
+
     def __init__(self):
-        pass
+        #setup
+        super().__init__()
+        self.title("Game Of Nim")
+        self.geometry("600x600")
+        self.minsize(600, 600)
 
-    def single_or_Multi(self):
-        pass
 
-    def starting_marbles(self):
-        pass
+        #widgets
+        self.menu = Menu(self)
 
-    # cant remeber what this was for in planning???
-    def draw_point(self):
-        pass
+        #run the app
+        self.mainloop()
 
-    def take_marbles(self):
-        pass
+class Menu(ttk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent)
 
-    def exit_game(self):
-        pass
+def main():
+    test = App()
 
-    def show_marbles(self):
-        pass
-
-    def update_chat(self):
-        pass
-
-    def game_difficulty(self):
-        pass
-
+if __name__ == "__main__":
+    main()
