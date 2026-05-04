@@ -83,7 +83,7 @@ Indicate what percentage of the project you have left to complete and how confid
 **Completion Percentage**: `0 - 100%`
 75%
 
-❗️**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
+**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
   strategies you can employ to increase the likelihood that you'll be successful in completing this project 
   before the deadline.
 
@@ -99,20 +99,26 @@ Indicate what percentage of the project you have left to complete and how confid
 
 ## Milestone 4: Final Code, Presentation, Demo
 
-### ❗User Instructions
+### User Instructions
 
-❗In a paragraph, explain how to use your program. Assume the user is starting just after they hit the "Run" button 
+In a paragraph, explain how to use your program. Assume the user is starting just after they hit the "Run" button 
 in PyCharm. 
 
-### ❗Errors and Constraints
+at the start you can use the slider in the middle of the screen to select a number between 15 and 30 balls this will be the number of balls you play with
+then you can use the check box to select between single and multiplayer
+finnaly you can use the start game button to take you to the next screen the number of balls will be displayed in the middle of the screen
+and the players turn at the top at the buttom you can choose to take 1 2 3 or 4 balls the goal of the game is to pick up the last ball
+whoever does so will win.
 
-❗Every program has bugs or features that had to be scrapped for time. These bugs should be tracked in the issue queue. 
+### Errors and Constraints
+
+Every program has bugs or features that had to be scrapped for time. These bugs should be tracked in the issue queue. 
 You should already have a few items in here from the prior weeks. Create a new issue for any undocumented errors and 
 deficiencies that remain in your code. Bugs found that aren't acknowledged in the queue will be penalized.
 
-### ❗Reflection
+### Reflection
 
-❗Each partner should write three to four well-written paragraphs address the following (at a minimum):
+Each partner should write three to four well-written paragraphs address the following (at a minimum):
 - Why did you select the project that you did?
 - How closely did your final project reflect your initial design?
 - What did you learn from this process?
@@ -120,8 +126,21 @@ deficiencies that remain in your code. Bugs found that aren't acknowledged in th
 - What would you do differently next time, knowing what you know now?
 - How well did you work with your partner? What made it go well? What made it challenging?
 
+
+
 ```
-    Partner 1: **Replace this with your reflection
+       I propsed the idea of the game of nim becouse i beileive it was one of ther funniest projects
+we had to code during this semester and beileived it would be easy to expand on. though the 
+finaly project didn't meet my initial designs i had imigined i beileive we did a good job 
+and got alot done.
+    i learned from this project, its very important to leave enough time to be able to implement every
+you imigined, as some of the aspects may be harder to implement than you orignanly thought such
+as the switching screen for this project as i beileive this was the hardest part of the code for me
+i still dont have a full grasp on how it works same with layout i stuggled with it alot but eventually 
+figured my way around it.
+    i beileive i would start sooner and do more reasearch into tkinter to learn more how it works
+i beileive this would allow me to do better in the design and codeing. i beileive me and my didnt work the best
+- together. - Preston Worrix
 ```
 
 ```

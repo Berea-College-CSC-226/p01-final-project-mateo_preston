@@ -1,6 +1,11 @@
+#importing everything needed for the program
 import tkinter as tk
 from tkinter import ttk
+import random
 
+#class app used to create the screen and do basic set up such as screen size and title
+#also created a way to switch between screens with container mainloop keeps the screen up
+#and style updates the windows to look more modern
 class App(tk.Tk):
 
     def __init__(self):
@@ -22,7 +27,7 @@ class App(tk.Tk):
         self.style.theme_use('clam')
 
         self.mainloop()
-
+# used to switch between frames to act as differen screens
     def show_frame(self, page_name, **kwargs):
         for widget in self.container.winfo_children():
             widget.destroy()
@@ -32,6 +37,7 @@ class App(tk.Tk):
         elif page_name == "game":
             self.current_frame = GameBoard(self.container, self, kwargs.get("count"))
 
+#basic set up for menu screen such as collumn and row set up and all logic
 class Menu(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -46,6 +52,7 @@ class Menu(ttk.Frame):
 
         self.create_widgets()
 
+#where all the gui for the menu screen is created
     def create_widgets(self):
         """
         Makes widgets. There's only one use of this method. Thanks, OOP
@@ -67,7 +74,7 @@ class Menu(ttk.Frame):
         start_btn = ttk.Button(self, text="Start Game", command=self.start_game)
         start_btn.grid(column=1, row=4, pady=20, ipadx=20, ipady=10)
 
-
+#logic for start game button switches frames
     def start_game(self):
         """
         Button. Changes the frame from the menu to the game
@@ -76,7 +83,9 @@ class Menu(ttk.Frame):
         count = self.item_count.get()
         self.controller.show_frame("game", count=count)
 
-class GameBoard(ttk.Frame): # Begin the game!
+#setup for the gameboard screen
+class GameBoard(ttk.Frame):
+#basic setup for gameboard logic and buttons
     def __init__(self, parent, controller, count):
         super().__init__(parent)
         self.controller = controller
@@ -155,15 +164,7 @@ class GameBoard(ttk.Frame): # Begin the game!
             self.update_game(0)
 
 
-    def player_turn(self):
-        pass
-    def check_victory(self):
-        if self.count <= 0:  # Check if the game is won. Announces victory and disables buttons
-            self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
-            self.final_disable()
-
-    def update_game(self, isSingleplayer):
-        # Draw the marbles
+    def update_game(self):
         self.draw_marbles()
         self.count_label.configure(text=f"Balls Remaining: {self.count}")
 
@@ -174,16 +175,11 @@ class GameBoard(ttk.Frame): # Begin the game!
         else: # If not, pass the turn to P1
             if self.current_player == 1:
                 self.current_player = 2
-            else: # else, pass turn to P2
+                self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
+            else:
                 self.current_player = 1
-            self.turn_label.config(text=f"player {self.current_player}'s turn!")
+                self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
             self.check_disable()
-        if self.current_player == 1:
-            # if isSingleplayer:
-
-            self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
-        else:
-            self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
 
     def check_disable(self):
         """
@@ -206,11 +202,15 @@ class GameBoard(ttk.Frame): # Begin the game!
         self.btn4.config(state="disabled")
         self.reset_btn.pack(pady=10)
 
+#reset button to logic to reset the game at the end to skip the menu screen
     def reset_game(self):
         self.controller.show_frame("game", count=15)
 
+#go back button is similar to reset but takes you to the menu screen to be able to make changes
     def go_back(self):
         self.controller.show_frame("menu")
 
+
+#creates the object for app class and starts the program
 if __name__ == "__main__":
     App()
