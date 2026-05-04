@@ -48,6 +48,8 @@ class Menu(ttk.Frame):
         self.rowconfigure((0,1,2,3,4), weight=1)
 
         self.item_count = tk.IntVar(value=15)
+
+        #if 0 multiplayer selected if 1 singleplayer
         self.vs_computer=tk.IntVar(value=0)
 
         self.create_widgets()
