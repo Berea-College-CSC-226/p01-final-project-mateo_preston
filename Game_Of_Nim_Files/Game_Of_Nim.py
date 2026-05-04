@@ -27,7 +27,7 @@ class App(tk.Tk):
         self.style.theme_use('clam')
 
         self.mainloop()
-# used to switch between frames to act as differen screens
+# used to switch between frames to act as different screens
     def show_frame(self, page_name, **kwargs):
         for widget in self.container.winfo_children():
             widget.destroy()
@@ -37,7 +37,7 @@ class App(tk.Tk):
         elif page_name == "game":
             self.current_frame = GameBoard(self.container, self, kwargs.get("count"))
 
-#basic set up for menu screen such as collumn and row set up and all logic
+#basic set up for menu screen such as collum and row set up and all logic
 class Menu(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
