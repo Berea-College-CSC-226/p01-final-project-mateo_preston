@@ -1,7 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import messagebox #    WHY DO I HAVE TO IMPORT IT MANUALLY
-from random import randint
+import random
 # import PIL
 
 def test_message():
@@ -95,6 +95,12 @@ class Single_Nim ():
             self.marble_count -= randint(1, 4)
             print("Okay, I'll steal a random amount")
 
+    def change_turn(self):
+
+        while marble_count > 0:
+            if marble_count == 0:
+                break
+            marble_count = computer_take(marble_count)
 
     def check_win(self):
         pass
