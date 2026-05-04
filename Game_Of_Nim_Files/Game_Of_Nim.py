@@ -1,6 +1,7 @@
 #importing everything needed for the program
 import tkinter as tk
 from tkinter import ttk
+import time
 import random
 
 #class app used to create the screen and do basic set up such as screen size and title
@@ -163,23 +164,42 @@ class GameBoard(ttk.Frame):
             self.count -= amount
             self.update_game()
 
+    def computer_turn(self):
+        # self.after
+        # time.sleep(0.1)
+        if self.count % 5 != 0 :
+            self.make_move(self.count % 5)
+        self.current_player = 1 # pass the turn back to P1
+        self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
+        time.sleep(0.1)
+
 
     def update_game(self):
+        # First redraw the marbles
         self.draw_marbles()
         self.count_label.configure(text=f"Balls Remaining: {self.count}")
 
-        #  This jumble of if elses are a bit of
-        if self.count <= 0: # Check if the game is won. Announces victory and disables buttons
-            self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
-            self.final_disable()
-        else: # If not, pass the turn to P1
-            if self.current_player == 1:
+
+
+        if self.current_player == 1:
+            if self.vs_computer() == 0: # Pass the turn to the next player.
                 self.current_player = 2
                 self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
-            else:
-                self.current_player = 1
-                self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
-            self.check_disable()
+            else: # or the AI if this is singleplayer
+                self.turn_label.config(text="The computer is thinking...", foreground="red")
+                self.after(500, self.computer_turn)
+        else: # pass the control back to player 1, which is always a human.
+            self.current_player = 1
+            self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
+        # Then check if the game is won. Announces victory and disables buttons
+        if self.count <= 0:
+            self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
+            self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
+
+            self.final_disable()
+            return None
+        # Check which buttons can be pressed
+        self.check_disable()
 
     def check_disable(self):
         """
