@@ -161,7 +161,7 @@ class GameBoard(ttk.Frame):
         """
         if self.count >= amount:
             self.count -= amount
-            self.update_game(0)
+            self.update_game()
 
 
     def update_game(self):
