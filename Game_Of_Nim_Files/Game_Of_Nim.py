@@ -1,6 +1,11 @@
+#importing everything needed for the program
 import tkinter as tk
 from tkinter import ttk
+import random
 
+#class app used to create the screen and do basic set up such as screen size and title
+#also created a way to switch between screens with container mainloop keeps the screen up
+#and style updates the windows to look more modern
 class App(tk.Tk):
 
     def __init__(self):
@@ -19,7 +24,7 @@ class App(tk.Tk):
         self.style.theme_use('clam')
 
         self.mainloop()
-
+# used to switch between frames to act as differen screens
     def show_frame(self, page_name, **kwargs):
         for widget in self.container.winfo_children():
             widget.destroy()
@@ -29,6 +34,7 @@ class App(tk.Tk):
         elif page_name == "game":
             self.current_frame = GameBoard(self.container, self, kwargs.get("count"))
 
+#basic set up for menu screen such as collumn and row set up and all logic
 class Menu(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -43,6 +49,7 @@ class Menu(ttk.Frame):
 
         self.create_widgets()
 
+#where all the gui for the menu screen is created
     def create_widgets(self):
         toggle = ttk.Checkbutton(self, text="Play against Computer?", variable=self.vs_computer)
         toggle.grid(column=1, row=3, pady=10)
@@ -56,12 +63,14 @@ class Menu(ttk.Frame):
         start_btn = ttk.Button(self, text="Start Game", command=self.start_game)
         start_btn.grid(column=1, row=4, pady=20, ipadx=20, ipady=10)
 
-
+#logic for start game button switches frames
     def start_game(self):
         count = self.item_count.get()
         self.controller.show_frame("game", count=count)
 
+#setup for the gameboard screen
 class GameBoard(ttk.Frame):
+#basic setup for gameboard logic and buttons
     def __init__(self, parent, controller, count):
         super().__init__(parent)
         self.controller = controller
@@ -99,6 +108,7 @@ class GameBoard(ttk.Frame):
 
         self.draw_marbles()
 
+#this functions use the canvas to draw the balls also used to update the screen
     def draw_marbles(self):
         self.canvas.delete("all")
 
@@ -107,16 +117,20 @@ class GameBoard(ttk.Frame):
             y = 20 + (i // 10) * 35
             self.canvas.create_oval(x, y, x+25, y+25, fill="red", outline="black")
 
+#setup for the take buttons maps to the makemove function below
     def take_1(self): self.make_move(1)
     def take_2(self): self.make_move(2)
     def take_3(self): self.make_move(3)
     def take_4(self): self.make_move(4)
 
+#call by the take functions above used for the real logic to take the balls and update the game
     def make_move(self, amount):
         if self.count >= amount:
             self.count -= amount
             self.update_game()
 
+#calls the draw_marbles function from above to update the game when needed also sets new text on the label
+#changes players turn and colors
     def update_game(self):
         self.draw_marbles()
         self.count_label.configure(text=f"Balls Remaining: {self.count}")
@@ -136,12 +150,14 @@ class GameBoard(ttk.Frame):
         else:
             self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
 
+#checks to make sure no buttons need to be disabled due to not enough balls after each turn
     def check_disable(self):
         self.btn1.config(state="normal" if self.count >= 1 else "disabled")
         self.btn2.config(state="normal" if self.count >= 2 else "disabled")
         self.btn3.config(state="normal" if self.count >= 3 else "disabled")
         self.btn4.config(state="normal" if self.count >= 4 else "disabled")
 
+#gets called and disables all take buttons while displaying a play again button
     def final_disable(self):
         self.btn1.config(state="disabled")
         self.btn2.config(state="disabled")
@@ -149,11 +165,15 @@ class GameBoard(ttk.Frame):
         self.btn4.config(state="disabled")
         self.reset_btn.pack(pady=10)
 
+#reset button to logic to reset the game at the end to skip the menu screen
     def reset_game(self):
         self.controller.show_frame("game", count=15)
 
+#go back button is similar to reset but takes you to the menu screen to be able to make changes
     def go_back(self):
         self.controller.show_frame("menu")
 
+
+#creates the object for app class and starts the program
 if __name__ == "__main__":
     App()
