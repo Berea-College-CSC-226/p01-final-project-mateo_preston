@@ -35,7 +35,7 @@ class App(tk.Tk):
         if page_name == "menu":
             self.current_frame = Menu(self.container, self)
         elif page_name == "game":
-            self.current_frame = GameBoard(self.container, self, kwargs.get("count"))
+            self.current_frame = GameBoard(self.container, self, kwargs.get("count"), kwargs.get("vs_computer"))
 
 #basic set up for menu screen such as collum and row set up and all logic
 class Menu(ttk.Frame):
@@ -51,6 +51,8 @@ class Menu(ttk.Frame):
 
         #if 0 multiplayer selected if 1 singleplayer
         self.vs_computer=tk.IntVar(value=0)
+        self.vs_computer.get()
+
 
         self.create_widgets()
 
@@ -83,18 +85,20 @@ class Menu(ttk.Frame):
         :return: none
         """
         count = self.item_count.get()
-        self.controller.show_frame("game", count=count)
+        vs = self.vs_computer.get()
+        self.controller.show_frame("game", count=count, vs_computer=vs)
 
 #setup for the gameboard screen
 class GameBoard(ttk.Frame):
 #basic setup for gameboard logic and buttons
-    def __init__(self, parent, controller, count):
+    def __init__(self, parent, controller, count, vs_computer):
         super().__init__(parent)
         self.controller = controller
         self.count = count
         self.current_player = 1
-        self.isMultiplayer = 0
         self.pack(expand=True, fill='both')
+        self.vs_computer = vs_computer
+
 
         # First label; changes when we switch players.
         self.turn_label = ttk.Label(self, text="Player 1's Turn:", font=("Arial", 16, "bold"))
@@ -151,8 +155,6 @@ class GameBoard(ttk.Frame):
     def take_3(self): self.make_move(3)
     def take_4(self): self.make_move(4)
     # And this one is for the multiplayer
-    def vs_computer(self): #
-        self.isMultiplayer = 0
 
 
     def make_move(self, amount):
@@ -170,6 +172,7 @@ class GameBoard(ttk.Frame):
         self.draw_marbles()
         self.count_label.configure(text=f"Balls Remaining: {self.count}")
 
+
         #  This jumble of if elses are a bit of
         if self.count <= 0: # Check if the game is won. Announces victory and disables buttons
             self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
@@ -178,10 +181,23 @@ class GameBoard(ttk.Frame):
             if self.current_player == 1:
                 self.current_player = 2
                 self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
+
+                if self.vs_computer:
+                    self.disable_buttons()
+                    self.after(500, self.computer_move)
+
+                self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
             else:
                 self.current_player = 1
                 self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
             self.check_disable()
+
+
+
+    def computer_move(self):
+        amount = random.randint(1, 4)
+        amount = min(amount, self.count)
+        self.make_move(amount)
 
     def check_disable(self):
         """
@@ -192,6 +208,13 @@ class GameBoard(ttk.Frame):
         self.btn2.config(state="normal" if self.count >= 2 else "disabled")
         self.btn3.config(state="normal" if self.count >= 3 else "disabled")
         self.btn4.config(state="normal" if self.count >= 4 else "disabled")
+
+
+    def disable_buttons(self):
+        self.btn1.config(state="disabled")
+        self.btn2.config(state="disabled")
+        self.btn3.config(state="disabled")
+        self.btn4.config(state="disabled")
 
     def final_disable(self):
         """
@@ -206,8 +229,8 @@ class GameBoard(ttk.Frame):
 
 #reset button to logic to reset the game at the end to skip the menu screen
     def reset_game(self):
-        self.controller.show_frame("game", count=15)
-
+        self.controller.show_frame("game", count=15, vs_computer=self.vs_computer)
+        self.reset_btn.pack_forget()
 #go back button is similar to reset but takes you to the menu screen to be able to make changes
     def go_back(self):
         self.controller.show_frame("menu")
