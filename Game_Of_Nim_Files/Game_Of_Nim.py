@@ -24,7 +24,7 @@ class App(tk.Tk):
         self.show_frame("menu")
 
         self.style = ttk.Style()
-        self.style.theme_use('clam')
+        self.style.theme_use('vista')
 
         self.mainloop()
 # used to switch between frames to act as different screens
