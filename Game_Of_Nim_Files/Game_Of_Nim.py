@@ -193,10 +193,14 @@ class GameBoard(ttk.Frame):
             self.check_disable()
 
 
-
     def computer_move(self):
-        amount = random.randint(1, 4)
-        amount = min(amount, self.count)
+        target = self.count % 5
+
+        if target == 0:
+            amount = random.randint(1, min(4, self.count))
+        else:
+            amount = target
+
         self.make_move(amount)
 
     def check_disable(self):
