@@ -2,9 +2,6 @@
 
 ## Instructions
 
-❗️Exclamation Marks ❗️indicate action items; you should remove these emoji as you complete/update the items which 
-  they accompany. (This means that your final README should have no ❗️in it!)
-
 ️**Author(s)**: Preston, Mateo
 
 ️**Google Doc Link**: https://docs.google.com/document/d/18_jXzAVD610KmoF3pNYhY-C-fQ4JiSqebzeSFdFkPwI/edit?usp=sharing
@@ -45,7 +42,7 @@ into your own, following the process we've discussed in previous assignments, th
 
 ### References 
 
-❗Throughout this project, you will likely use outside resources. Reference all ideas which are not your own, 
+Throughout this project, you will likely use outside resources. Reference all ideas which are not your own, 
 and describe how you integrated the ideas or code into your program. This includes online sources, people who have 
 helped you, AI tools you've used, and any other resources that are not solely your own contribution. Update this 
 section as you go. DO NOT forget about it!
@@ -59,10 +56,9 @@ https://gemini.google.com/share/6e939ba0e3c7
 ---
 
 ## Milestone 2: Code Setup and Issue Queue
+Most importantly, keep your issue queue up to date, and focus on your code. 🙃
 
-❗Most importantly, keep your issue queue up to date, and focus on your code. 🙃
-
-❗Reflect on what you’ve done so far. How’s it going? Are you feeling behind/ahead? What are you worried about? 
+Reflect on what you’ve done so far. How’s it going? Are you feeling behind/ahead? What are you worried about? 
 What has surprised you so far? Describe your general feelings. Be honest with yourself; this section is for you, not me.
 
 ```
@@ -80,16 +76,22 @@ What has surprised you so far? Describe your general feelings. Be honest with yo
 
 ## Milestone 3: Virtual Check-In
 
-❗Indicate what percentage of the project you have left to complete and how confident you feel. 
+Indicate what percentage of the project you have left to complete and how confident you feel.
+25%
 
-❗️**Completion Percentage**: `0 - 100%`
+**Completion Percentage**: `0 - 100%`
+75%
 
 ❗️**Confidence**: Describe how confident you feel about completing this project, and why. Then, describe some 
   strategies you can employ to increase the likelihood that you'll be successful in completing this project 
   before the deadline.
 
 ```
-    **Replace this with your reflection
+   i feel confident that we will complete on time i fell like we have a 100% change of completing it at this point
+   -Preston Worrix
+   
+   
+   -Mateo
 ```
 
 ---
