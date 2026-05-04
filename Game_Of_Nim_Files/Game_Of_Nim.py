@@ -4,6 +4,9 @@ from tkinter import ttk
 class App(tk.Tk):
 
     def __init__(self):
+        """
+        Makes the main menu on startup
+        """
         #setup
         super().__init__()
         self.title("Game Of Nim")
@@ -44,45 +47,62 @@ class Menu(ttk.Frame):
         self.create_widgets()
 
     def create_widgets(self):
-        toggle = ttk.Checkbutton(self, text="Play against Computer?", variable=self.vs_computer)
-        toggle.grid(column=1, row=3, pady=10)
-
-        label = ttk.Label(self, text="Select Number of Items:", font=("Arial", 12))
+        """
+        Makes widgets. There's only one use of this method. Thanks, OOP
+        :return: none
+        """
+        # header
+        label = ttk.Label(self, text="Select number of marbles:", font=("Arial", 12))
         label.grid(column=1, row=1, pady=10)
 
+        # Marble scale
         slider = tk.Scale(self, from_=15, to=30, orient=tk.HORIZONTAL, variable = self.item_count)
         slider.grid(column=1, row=2, sticky="ew", padx=50)
 
+        # Singleplayer mode toggle
+        toggle = ttk.Checkbutton(self, text="Play against Computer?", variable=self.vs_computer)
+        toggle.grid(column=1, row=3, pady=10)
+
+        # Start button
         start_btn = ttk.Button(self, text="Start Game", command=self.start_game)
         start_btn.grid(column=1, row=4, pady=20, ipadx=20, ipady=10)
 
 
     def start_game(self):
+        """
+        Button. Changes the frame from the menu to the game
+        :return: none
+        """
         count = self.item_count.get()
         self.controller.show_frame("game", count=count)
 
-class GameBoard(ttk.Frame):
+class GameBoard(ttk.Frame): # Begin the game!
     def __init__(self, parent, controller, count):
         super().__init__(parent)
         self.controller = controller
         self.count = count
         self.current_player = 1
+        self.isMultiplayer = 0
         self.pack(expand=True, fill='both')
 
-        self.reset_btn = ttk.Button(self, text="play again", command=self.reset_game)
-
+        # First label; changes when we switch players.
         self.turn_label = ttk.Label(self, text="Player 1's Turn:", font=("Arial", 16, "bold"))
         self.turn_label.pack(pady=10)
 
-        self.count_label = ttk.Label(self, text=f"{count} Balls Left!", font=("Arial", 12))
+        # marbles remaining
+        self.count_label = ttk.Label(self, text=f"{count} marbles left!", font=("Arial", 12))
         self.count_label.pack(pady=10)
 
+        # the canvas with all those ovals/marbles
         self.canvas = tk.Canvas(self, width=400, height=400, bg="white")
         self.canvas.pack(pady=10)
 
+        # the frame for all the buttons
         self.button_frame = ttk.Frame(self)
         self.button_frame.pack(pady=10)
+        self.draw_marbles()
 
+        # said buttons
         self.btn1 = ttk.Button(self.button_frame, text="Take 1", command=self.take_1)
         self.btn1.grid(row=1, column=0, padx=5)
 
@@ -95,11 +115,18 @@ class GameBoard(ttk.Frame):
         self.btn4 = ttk.Button(self.button_frame, text="Take 4", command=self.take_4)
         self.btn4.grid(row=1, column=3, padx=5)
 
+        # Reset the game. Only appears on game end
+        self.reset_btn = ttk.Button(self, text="Play again", command=self.reset_game)
+
+        # Exit this bloody application
         ttk.Button(self, text="Quit To Menu", command=self.go_back).pack(side="bottom")
 
-        self.draw_marbles()
 
-    def draw_marbles(self):
+    def draw_marbles(self): #
+        """
+        Used to render and re-render the marbles.
+        :return: none
+        """
         self.canvas.delete("all")
 
         for i in range(self.count):
@@ -107,24 +134,44 @@ class GameBoard(ttk.Frame):
             y = 20 + (i // 10) * 35
             self.canvas.create_oval(x, y, x+25, y+25, fill="red", outline="black")
 
+    # These four blocks are for the buttons. Take the appropriate amount of marbles
     def take_1(self): self.make_move(1)
     def take_2(self): self.make_move(2)
     def take_3(self): self.make_move(3)
     def take_4(self): self.make_move(4)
+    # And this one is for the multiplayer
+    def vs_computer(self): #
+        self.isMultiplayer = 0
+
 
     def make_move(self, amount):
+        """
+        Steal the appropriate amount of marbles
+        :param amount: amount of marbles to take
+        :return: none
+        """
         if self.count >= amount:
             self.count -= amount
-            self.update_game()
+            self.update_game(0)
 
-    def update_game(self):
+
+    def player_turn(self):
+        pass
+    def check_victory(self):
+        if self.count <= 0:  # Check if the game is won. Announces victory and disables buttons
+            self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
+            self.final_disable()
+
+    def update_game(self, isSingleplayer):
+        # Draw the marbles
         self.draw_marbles()
         self.count_label.configure(text=f"Balls Remaining: {self.count}")
 
-        if self.count <= 0:
+        #  This jumble of if elses are a bit of
+        if self.count <= 0: # Check if the game is won. Announces victory and disables buttons
             self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
             self.final_disable()
-        else:
+        else: # If not, pass the turn to the next player
             if self.current_player == 1:
                 self.current_player = 2
             else:
@@ -132,17 +179,27 @@ class GameBoard(ttk.Frame):
             self.turn_label.config(text=f"player {self.current_player}'s turn!")
             self.check_disable()
         if self.current_player == 1:
+            # if isSingleplayer:
+
             self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
         else:
             self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
 
     def check_disable(self):
+        """
+        Checks the buttons that can be clicked on each turn
+        :return:
+        """
         self.btn1.config(state="normal" if self.count >= 1 else "disabled")
         self.btn2.config(state="normal" if self.count >= 2 else "disabled")
         self.btn3.config(state="normal" if self.count >= 3 else "disabled")
         self.btn4.config(state="normal" if self.count >= 4 else "disabled")
 
     def final_disable(self):
+        """
+        Turns off all buttons when the game ends
+        :return: none
+        """
         self.btn1.config(state="disabled")
         self.btn2.config(state="disabled")
         self.btn3.config(state="disabled")
