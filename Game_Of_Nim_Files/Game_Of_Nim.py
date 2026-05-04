@@ -171,10 +171,10 @@ class GameBoard(ttk.Frame): # Begin the game!
         if self.count <= 0: # Check if the game is won. Announces victory and disables buttons
             self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
             self.final_disable()
-        else: # If not, pass the turn to the next player
+        else: # If not, pass the turn to P1
             if self.current_player == 1:
                 self.current_player = 2
-            else:
+            else: # else, pass turn to P2
                 self.current_player = 1
             self.turn_label.config(text=f"player {self.current_player}'s turn!")
             self.check_disable()
