@@ -141,14 +141,11 @@ class GameBoard(ttk.Frame):
         else:
             if self.current_player == 1:
                 self.current_player = 2
+                self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
             else:
                 self.current_player = 1
-            self.turn_label.config(text=f"player {self.current_player}'s turn!")
+                self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
             self.check_disable()
-        if self.current_player == 1:
-            self.turn_label.config(text="Player 1's Turn", foreground="royalblue")
-        else:
-            self.turn_label.config(text="Player 2's Turn", foreground="darkorange")
 
 #checks to make sure no buttons need to be disabled due to not enough balls after each turn
     def check_disable(self):
