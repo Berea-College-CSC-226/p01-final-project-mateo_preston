@@ -143,8 +143,10 @@ class GameBoard(ttk.Frame):
 
 
     def initialize_sounds(self):
-        self.tada_sound = mixer.Sound("freesound_community-tada-fanfare-a-6313.mp3")
-        self.lose_sound = mixer.Sound("freesound_community-wah-wah-sad-trombone-6347.mp3")
+        self.tada_sound = mixer.Sound("tada.mp3")
+        self.lose_sound = mixer.Sound("wahwah.mp3")
+        self.p2_sound = mixer.Sound("pick1.mp3")
+        self.p1_sound = mixer.Sound("pick2.mp3")
 
 
 
@@ -173,6 +175,11 @@ class GameBoard(ttk.Frame):
         :param amount: number of marbles to take
         :return: none
         """
+        if self.current_player == 1:
+            self.p1_sound.play()
+        else:
+            self.p2_sound.play()
+
         if self.count >= amount:
             self.count -= amount
             self.update_game()
