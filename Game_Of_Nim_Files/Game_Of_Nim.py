@@ -2,6 +2,8 @@
 import tkinter as tk
 from tkinter import ttk
 import random
+# import playsound # forget this, we would have to downgrade python for this to work.
+from pygame import mixer
 
 #class app used to create the screen and do basic set up such as screen size and title
 #also created a way to switch between screens with container mainloop keeps the screen up
@@ -27,7 +29,7 @@ class App(tk.Tk):
         self.style.theme_use('vista')
 
         self.mainloop()
-# used to switch between frames to act as different screens
+    # used to switch between frames to act as different screens
     def show_frame(self, page_name, **kwargs):
         for widget in self.container.winfo_children():
             widget.destroy()
@@ -99,6 +101,9 @@ class GameBoard(ttk.Frame):
         self.pack(expand=True, fill='both')
         self.vs_computer = vs_computer
 
+        # initialize the sound mixer
+        mixer.init()
+        self.initialize_sounds()
 
         # First label; changes when we switch players.
         self.turn_label = ttk.Label(self, text="Player 1's Turn:", font=("Arial", 16, "bold"))
@@ -137,6 +142,14 @@ class GameBoard(ttk.Frame):
         ttk.Button(self, text="Quit To Menu", command=self.go_back).pack(side="bottom")
 
 
+    def initialize_sounds(self):
+        self.tada_sound = mixer.Sound("tada.mp3")
+        self.lose_sound = mixer.Sound("wahwah.mp3")
+        self.p2_sound = mixer.Sound("pick1.mp3")
+        self.p1_sound = mixer.Sound("pick2.mp3")
+
+
+
     def draw_marbles(self): #
         """
         Used to render and re-render the marbles.
@@ -154,15 +167,19 @@ class GameBoard(ttk.Frame):
     def take_2(self): self.make_move(2)
     def take_3(self): self.make_move(3)
     def take_4(self): self.make_move(4)
-    # And this one is for the multiplayer
 
 
     def make_move(self, amount):
         """
         Steal the appropriate amount of marbles
-        :param amount: amount of marbles to take
+        :param amount: number of marbles to take
         :return: none
         """
+        if self.current_player == 1:
+            self.p1_sound.play()
+        else:
+            self.p2_sound.play()
+
         if self.count >= amount:
             self.count -= amount
             self.update_game()
@@ -173,9 +190,12 @@ class GameBoard(ttk.Frame):
         self.count_label.configure(text=f"Balls Remaining: {self.count}")
 
 
-        #  This jumble of if elses are a bit of
         if self.count <= 0: # Check if the game is won. Announces victory and disables buttons
             self.turn_label.config(text=f"Game Over! Player {self.current_player} Wins!", foreground="green")
+            if not (self.current_player == 2 and self.vs_computer):
+                self.tada_sound.play()
+            else:
+                self.lose_sound.play()
             self.final_disable()
         else: # If not, pass the turn to P1
             if self.current_player == 1:
@@ -212,7 +232,6 @@ class GameBoard(ttk.Frame):
         self.btn2.config(state="normal" if self.count >= 2 else "disabled")
         self.btn3.config(state="normal" if self.count >= 3 else "disabled")
         self.btn4.config(state="normal" if self.count >= 4 else "disabled")
-
 
     def disable_buttons(self):
         self.btn1.config(state="disabled")
