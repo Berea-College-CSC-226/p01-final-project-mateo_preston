@@ -54,6 +54,8 @@ https://share.google/aimode/grbidWlJItPTIR9Ar
 https://gemini.google.com/share/6e939ba0e3c7
 https://www.geeksforgeeks.org/python/play-sound-in-python/
 https://pixabay.com/sound-effects/search/ta-da/
+https://freesound.org/people/Owdeo/sounds/116653/
+Sounds by Owdeo
 
 ---
 
@@ -68,7 +70,8 @@ What has surprised you so far? Describe your general feelings. Be honest with yo
     i have i can dedicate a majority of my time and be able to complete my parts in time
     - Preston
     
-    
+    It wasn't going that great. I also had other stuff to focus on, and look where we are now.
+    We struggled heavily with the concept, as there is not much you can improve when making the Game of Nim.
     -Mateo
     
     
@@ -92,7 +95,8 @@ Indicate what percentage of the project you have left to complete and how confid
    i feel confident that we will complete on time i fell like we have a 100% change of completing it at this point
    -Preston Worrix
    
-   
+   I agree. The biggest hurdle was implementing the tkinter screen. I still can't wrap my head around it fully, but 
+   it IS complete! All we have to do now is add bloat.
    -Mateo
 ```
 
@@ -145,7 +149,16 @@ i beileive this would allow me to do better in the design and codeing. i beileiv
 ```
 
 ```
-    Partner 2: **Replace this with your reflection
+    I am sick of the game of nim at this point. It's the bloody game of nim! I had better, more fun ideas than just re-
+purposing a game nobody wants to actually play on their free time. Any kind of addition we would add to the game would
+just be bloat at that point. But I decided to accept to do the Game of Nim if Preston really wanted to.
+    That disdain unfortunately led me to not feel that attached to this project. By the time we united to see what prog-
+ress had been made, it was already mostly done. We worked on the same thing most of the time, so some code ended up dis-
+carded. As he said, he got the entirety of the tkinter canvas working. I added the comments and cleaned up.
+    It is sad that the result was this mediocre game, but to be honest, I'm just glad it's working. Maybe if I DID have
+creative control of this project it would have been so big that we wouldn't have finished. I just want more free time to
+actually implement those ideas and turn them into real projects. At least the semester is ending. 
+    - Mateo
 ```
 
 ---
