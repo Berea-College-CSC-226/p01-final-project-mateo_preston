@@ -48,11 +48,12 @@ and describe how you integrated the ideas or code into your program. This includ
 helped you, AI tools you've used, and any other resources that are not solely your own contribution. Update this 
 section as you go. DO NOT forget about it!
 
-https://youtu.be/epDKamC-V-8?si=1bNJ4eY1hHNsV5Ux
-https://youtu.be/eaxPK9VIkFM?si=GmSGtN2QnYjL17UJ
+https://youtu.be/epDKamC-V-8
+https://youtu.be/eaxPK9VIkFM
 https://share.google/aimode/grbidWlJItPTIR9Ar
 https://gemini.google.com/share/6e939ba0e3c7
-
+https://www.geeksforgeeks.org/python/play-sound-in-python/
+https://pixabay.com/sound-effects/search/ta-da/
 
 ---
 
